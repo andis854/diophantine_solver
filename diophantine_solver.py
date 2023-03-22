@@ -231,16 +231,16 @@ def solve(coefficients, right_hand_side):
                     sys_of_eq_new[0:tot_rows - 10, 0:tot_columns - 10] = sys_of_eq
                     sys_of_eq = sys_of_eq_new
 
-            sys_of_eq[:, [constant_column, constant_column + 1]] = sys_of_eq[:,[constant_column + 1, constant_column]]
-            constant_column += 1
+                sys_of_eq[:, [constant_column, constant_column + 1]] = sys_of_eq[:,[constant_column + 1, constant_column]]
+                constant_column += 1
 
-            sys_of_eq[[column, row_counter], :] = sys_of_eq[[row_counter, column], :]
-            sys_of_eq[column, column] = 1
-            sys_of_eq[column, _dim + row_counter - 1] = -1
+                sys_of_eq[[column, row_counter], :] = sys_of_eq[[row_counter, column], :]
+                sys_of_eq[column, column] = 1
+                sys_of_eq[column, _dim + row_counter - 1] = -1
 
-            row_counter += 1
-            break
-        row += 1
+                row_counter += 1
+                break
+            row += 1
         for row in numpy.delete(numpy.arange(0, row_counter), column):
 
             sys_of_eq[row, :] = sys_of_eq[row, :] - sys_of_eq[row, column] * sys_of_eq[column, :]
