@@ -81,7 +81,7 @@ def solve(coefficients, right_hand_side):
         |x_2| = | 3|*k + |-8|*l + |-2|
         |x_3|   |-2|     | 7|     | 0|
         |---|   |--|     |--|     |--|
-    where k,l are arbitrary integers.
+    where k,l are arbitrary integer parameters.
     
     Example 2:
     >>> import numpy,diophantine_solver
@@ -90,13 +90,13 @@ def solve(coefficients, right_hand_side):
     >>> general_solution = diophantine_solver.solve(c,d)
     >>> parameters = numpy.random.randint(-1000, 1001,2)
     >>> solution = general_solution[0]@parameters+general_solution[1]
-    >>> print(\'\'\'\nA solution to the diophantine equation\n    5x_1 + 7x_2 +8_x3 = 1\nis given by x_1=\'\'\' + str(solution[0])+\', x_2=\'+ str(solution[1])+\', x_3=\'+str(solution[2])+\'.\')
+    >>> print(\'\'\'\\nA solution to the diophantine equation\\n    5x_1 + 7x_2 +8_x3 = 1\\nis given by x_1=\'\'\' + str(solution[0])+\', x_2=\'+ str(solution[1])+\', x_3=\'+str(solution[2])+\'.\')
     
     A solution to the diophantine equation
         5x_1 + 7x_2 +8_x3 = 1
     is given by x_1=-12, x_2=-6101, x_3=5346."""
 
-
+    coefficients = coefficients.copy()
 
     if not type(coefficients) is numpy.ndarray:
         raise TypeError('coefficients must be of type numpy.ndarray')
