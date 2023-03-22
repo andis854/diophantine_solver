@@ -275,4 +275,5 @@ def solve(coefficients, right_hand_side):
             for column in numpy.arange(0, counter):
                 div_rest = divmod_mod(sys_of_eq[row, column], sys_of_eq[row,counter])
                 sys_of_eq[:, column] = sys_of_eq[:, column] - div_rest[0] * sys_of_eq[:, counter]
-    return [-sys_of_eq[:,-1],-sys_of_eq[-1]] 
+    print(sys_of_eq)
+    return [-sys_of_eq[:,:-1],-sys_of_eq[:,-1]] 
