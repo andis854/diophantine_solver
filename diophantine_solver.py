@@ -21,21 +21,19 @@ def divmod_mod(numerator, denominator):
     return div_rest
 
 
-# def division_optimal(numerator, denominator):
-#   div_rest = numpy.array(numpy.divmod(numerator, denominator))
-# 
-#   # best reduction
-#   if div_rest[1] > denominator / 2 and denominator > 0:
-#     div_rest[1] -= numpy.abs(denominator)
-#     div_rest[0] += 1
-#   if div_rest[1] < denominator / 2 and denominator < 0:
-#     div_rest[1] += numpy.abs(denominator)
-#     div_rest[0] += 1
-#   return (div_rest)
+# Calculate the greatest common divisor of a numpy array of integers.
+def gcd(array):
+    '\b'
+    if not type(array) is numpy.ndarray:
+        raise TypeError('Input must be of type numpy.ndarray')
+    if numpy.size(array) > 2:
+        return gcd(numpy.append(array[:-2],gcd(array[-2:])))
+    elif array[1] == 0:
+        return abs(array[0])
+    else:
+        return gcd(numpy.array([array[1], array[0] % array[1]]))
 
 
-
-# 
 
 def solve(coefficients, right_hand_side):
     """Finds all solutions to a linear inhomogeneous diophantine equation. The output is numpy compatible.
@@ -186,7 +184,7 @@ def solve(coefficients, right_hand_side):
 
 
         final_equation = numpy.concatenate((coefficients, numpy.array([-right_hand_side])))
-        final_equation = numpy.array(final_equation/numpy.gcd.reduce(final_equation),int)
+        final_equation = numpy.array(final_equation/gcd(final_equation),int)
         if numpy.count_nonzero(final_equation) < 3 and right_hand_side % final_equation[order[0]] != 0:
             print('No solutions!')
             return
@@ -280,6 +278,4 @@ def solve(coefficients, right_hand_side):
             for column in numpy.arange(0, counter):
                 div_rest = divmod_mod(sys_of_eq[row, column], sys_of_eq[row,counter])
                 sys_of_eq[:, column] = sys_of_eq[:, column] - div_rest[0] * sys_of_eq[:, counter]
-    return [-sys_of_eq[,-1],-sys_of_eq[-1]] 
-
-
+    return [-sys_of_eq[:,-1],-sys_of_eq[-1]] 
