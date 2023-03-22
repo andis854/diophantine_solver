@@ -129,12 +129,12 @@ def solve(coefficients, right_hand_side):
 
 
 
-#     if not type(coefficients) is numpy.ndarray:
-#         raise TypeError('coefficients must be of type numpy.ndarray')
-#     if numpy.size() ..............: 
-#         return numpy.array([[]])
-#     if not type(right_hand_side) is int:
-#         raise TypeError('right_hand_side must be of type int')
+    if not type(coefficients) is numpy.ndarray:
+        raise TypeError('coefficients must be of type numpy.ndarray')
+#    if numpy.size() ..............: 
+#        return numpy.array([[]])
+    if not type(right_hand_side) is int:
+        raise TypeError('right_hand_side must be of type int')
     
 
 
@@ -190,7 +190,6 @@ def solve(coefficients, right_hand_side):
             return
     elif _dim == 1 and right_hand_side % coefficients[0] == 0:
         solution = numpy.array([[int(right_hand_side / coefficients[0])]])
-
         return solution
     else:
         print('No solutions!')
@@ -249,8 +248,6 @@ def solve(coefficients, right_hand_side):
 
     tot_rows = row_counter
     sys_of_eq = sys_of_eq[0:_dim, row_counter:row_counter + _dim]
-
-
     row_order = numpy.argsort(numpy.count_nonzero(sys_of_eq[:, _dim:_dim - 1], axis=1))
 
     for counter in numpy.arange(0, _dim - 1):
@@ -271,7 +268,7 @@ def solve(coefficients, right_hand_side):
             non_zero_entries = (sys_of_eq[row, counter:_dim - 1] != 0)
             non_zero_entries_count = numpy.count_nonzero(non_zero_entries)
 
-        sys_of_eq[:, [counter, int(numpy.nonzero(non_zero_entries)[0]) + counter]] = sys_of_eq[:, [int(numpy.nonzero(non_zero_entries)[0]) + counter, count_nonzero]]
+        sys_of_eq[:, [counter, int(numpy.nonzero(non_zero_entries)[0]) + counter]] = sys_of_eq[:, [int(numpy.nonzero(non_zero_entries)[0]) + counter, counter]]
 
 
         if 0 < counter and counter < _dim - 1:
