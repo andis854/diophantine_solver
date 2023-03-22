@@ -52,7 +52,8 @@ def solve(coefficients, right_hand_side):
     Returns
     -------
     out : [numpy.ndarray,numpy.ndarray]
-        Numpy arrays with shape [[dimension,dimension],dimension].
+        Numpy arrays with shape [[n,n-1],n]. 
+        The first element gives the coefficients of the n parameters and the second element gives the constant terms.
     
 
     Notes
@@ -62,70 +63,38 @@ def solve(coefficients, right_hand_side):
 
     Examples
     --------
-    >>> matrix_gen()
-    array([[ 9, -1],
-       [ 1,  0]])
-       
-    Specify dimension:
     
-    >>> matrix_gen(5)
-    array([[ 9,  5,  0, -3, -3],
-           [-1,  3,  1,  3,  3],
-           [-1,  8, -2,  4,  4],
-           [-6, -9, -4, -6, -5],
-           [-6,  1,  8, -4,  2]])
-
-    >>> matrix_gen(dimension=3)
-    array([[ 1, -3,  5],
-           [-1,  2, -1],
-           [-3,  3,  8]])
-           
-    Specify determinant value:
+    Example 1:
+    >>> import numpy,diophantine_solver
+    >>> c=numpy.array([5,7,8])
+    >>> d=1
+    >>> diophantine_solver.solve(c,d)
+    [array([[-1,  0],
+           [ 3, -8],
+           [-2,  7]]), array([ 3, -2,  0])]
     
-    >>> matrix_gen(det_value=3)
-    array([[2, 1],
-           [7, 5]])
-
-    >>> matrix_gen(dimension=4,det_value=3)
-    array([[ 4, -4,  9,  3],
-           [ 3, -7,  7, -6],
-           [ 6,  2, -2,  3],
-           [-1, -6,  5, -7]])
-
-
-    >>> matrix_gen(3,-2)
-    array([[ 8, -8,  9],
-           [-2, -4,  8],
-           [-9, -1,  7]])
-    Set bounds of entries between -4 and 5:
+    This means that the general solution to the diophantine equation
+        5x_1 + 7x_2 + 8x_3 = 1
+    is given by
+        |---|   |--|     |--|     |--|
+        |x_1|   |-1|     | 0|     | 3|
+        |x_2| = | 3|*k + |-8|*l + |-2|
+        |x_3|   |-2|     | 7|     | 0|
+        |---|   |--|     |--|     |--|
+    where k,l are arbitrary integers.
     
-    >>> matrix_gen(dimension=4,lower_bound=-4,upper_bound=6)
-    array([[ 0, -2, -4, -1],
-           [ 5,  0,  2,  3],
-           [-3,  5,  5, -4],
-           [ 5,  1,  2,  1]])
+    Example 2:
+    >>> import numpy,diophantine_solver
+    >>> c=numpy.array([5,7,8])
+    >>> d=1
+    >>> general_solution = diophantine_solver.solve(c,d)
+    >>> parameters = numpy.random.randint(-1000, 1001,2)
+    >>> solution = general_solution[0]@parameters+general_solution[1]
+    >>> print(\'\'\'\nA solution to the diophantine equation\n    5x_1 + 7x_2 +8_x3 = 1\nis given by x_1=\'\'\' + str(solution[0])+\', x_2=\'+ str(solution[1])+\', x_3=\'+str(solution[2])+\'.\')
     
-    Set the number of random paramters to speed up calculations if the number of dimesions is large:
-    
-    >>> matrix_gen(dimension=8,rdn_prm=3)
-    array([[-3,  8, -6, -4, -5,  9,  0,  2],
-           [-8, -1, -9, -5,  5, -8,  9,  9],
-           [-3, -7,  3, -6, -4,  9, -6, -4],
-           [ 3, -3,  3,  6, -3,  2,  0,  4],
-           [ 2, -6,  0, -4,  2, -1,  7, -2],
-           [-7,  2, -3,  9,  8, -2,  7, -1],
-           [-8, -4,  4,  0,  3,  1,  1, -9],
-           [ 8, -7, -3, -5,  5, -2, -3,  2]])
-    
-    Set number of attemps:
-    
-    >>> matrix_gen(dimension=6,rdn_prm=3,attempts=100)
-    array([[-3,  6, -5,  2,  6, -3],
-           [ 3, -9, -9,  8,  4,  4],
-           [-8, -7,  6,  9, -1, -7],
-           [ 4,  2,  0,  3,  2,  7],
-           [ 0,  3, -4,  3,  9, -4],
-           [ 1,  6,  6,  7,  7,  2]])"""
+    A solution to the diophantine equation
+        5x_1 + 7x_2 +8_x3 = 1
+    is given by x_1=-12, x_2=-6101, x_3=5346."""
 
 
 
@@ -275,5 +244,4 @@ def solve(coefficients, right_hand_side):
             for column in numpy.arange(0, counter):
                 div_rest = divmod_mod(sys_of_eq[row, column], sys_of_eq[row,counter])
                 sys_of_eq[:, column] = sys_of_eq[:, column] - div_rest[0] * sys_of_eq[:, counter]
-    print(sys_of_eq)
     return [-sys_of_eq[:,:-1],-sys_of_eq[:,-1]] 
