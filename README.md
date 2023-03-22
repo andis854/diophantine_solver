@@ -1,8 +1,6 @@
 # Diophantine Solver 
 Finds all solutions to a linear inhomogeneous diophantine equation. The output is numpy compatible.
 
-Below we describe two ways of installing and using this package.
-
 ##  Download
 Use one of the following methods: 
 1. Using git clone:
