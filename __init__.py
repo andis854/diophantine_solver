@@ -1,4 +1,4 @@
 """
 description
 """
-from diophantine_solver import solve
+from diophantine_solver.diophantine_solver import solve
