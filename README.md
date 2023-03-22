@@ -41,10 +41,6 @@ diophantine_solver.solve(coefficients, right-hand-side)
 ```
 For a detailed explanation, type
 ```Python
->>> help(diophantine_solver)
-```
-or
-```Python
 >>> help(diophantine_solver.solve)
 ```
 
