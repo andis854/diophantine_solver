@@ -15,10 +15,11 @@ $ git clone https://github.com/andis854/diophantine_solver.git
 ~/.local/lib/python3.10/site-packages/ # Example of a common path.
 ```
 2. Download the source code: (also works for Windows) 
-Download the files in [zip](https://github.com/andis854/diophantine_solver/archive/refs/heads/main.zip) form. Extract the directory _diophantine_solver_ and put in a directory that is a search path of Python, e.g.
+Download the files in [zip](https://github.com/andis854/diophantine_solver/archive/refs/heads/main.zip) form. Extract the directory _diophantine_solver-main_ and put in a directory that is a search path of Python, e.g.
 ```bash
 ~/.local/lib/python3.10/site-packages/ # Example of a common path.
 ```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rename the directory _diophantine_solver_.
 
 To find the available search paths, type the following commands in a Python terminal.
 ```Python
