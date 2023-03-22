@@ -100,8 +100,10 @@ def solve(coefficients, right_hand_side):
 
     if not type(coefficients) is numpy.ndarray:
         raise TypeError('coefficients must be of type numpy.ndarray')
-#    if numpy.size() ..............: 
-#        return numpy.array([[]])
+    if not coefficients.dtype == 'int64':
+        raise TypeError('coefficients elements must be of type int64')
+    if numpy.size(coefficients) == 0: 
+        raise TypeError('The size of coefficients must be positive')
     if not type(right_hand_side) is int:
         raise TypeError('right_hand_side must be of type int')
     
@@ -116,8 +118,7 @@ def solve(coefficients, right_hand_side):
         order = numpy.flip(numpy.argsort(abs_coefficients), axis=0)
 
         tot_rows = 10
-        tot_columns = _dim + 11  # Ta bort denna
-        sys_of_eq = numpy.zeros([tot_rows, tot_columns], int)
+        sys_of_eq = numpy.zeros([tot_rows, tot_rows+_dim+11], int)
 
         row_counter = 0
         nonzero_variables = numpy.count_nonzero(coefficients)
@@ -128,15 +129,15 @@ def solve(coefficients, right_hand_side):
 
             if row_counter >= tot_rows - 3:
                 tot_rows += 10
-                tot_columns += 10
-                sys_of_eq_new = numpy.zeros([tot_rows, tot_columns], int)
-                sys_of_eq_new[0:tot_rows - 10, 0:tot_columns - 10] = sys_of_eq
+                sys_of_eq_new = numpy.zeros([tot_rows, tot_rows+_dim+11], int)
+                sys_of_eq_new[0:tot_rows - 10, 0:tot_rows +_dim + 1] = sys_of_eq
+
                 sys_of_eq = sys_of_eq_new
 
             div_rest = divmod_mod(coefficients[order[0]],coefficients[order[1]])
             
 
-            sys_of_eq[row_counter, coefficient_order[order[1]]] = 1  # Bokföring
+            sys_of_eq[row_counter, coefficient_order[order[1]]] = 1 
             sys_of_eq[row_counter, row_counter + _dim] = -1
             sys_of_eq[row_counter, coefficient_order[order[0]]] = div_rest[0]
 
@@ -194,9 +195,8 @@ def solve(coefficients, right_hand_side):
             elif row == row_counter - 1:
                 if row_counter >= tot_rows - 4:
                     tot_rows += 10
-                    tot_columns += 10
-                    sys_of_eq_new = numpy.zeros([tot_rows, tot_columns], int)
-                    sys_of_eq_new[0:tot_rows - 10, 0:tot_columns - 10] = sys_of_eq
+                    sys_of_eq_new = numpy.zeros([tot_rows, tot_rows + _dim + 11], int)
+                    sys_of_eq_new[0:tot_rows - 10, 0:tot_rows + _dim + 1] = sys_of_eq
                     sys_of_eq = sys_of_eq_new
 
                 sys_of_eq[:, [constant_column, constant_column + 1]] = sys_of_eq[:,[constant_column + 1, constant_column]]
