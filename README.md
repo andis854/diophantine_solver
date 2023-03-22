@@ -7,15 +7,15 @@ Below we describe two ways of installing and using this package; by calling it f
 Use one of the following methods: 
 1. Using git clone:
 ```bash
-$ git clone https://github.com/andis854/diophantine-solver.git
+$ git clone https://github.com/andis854/diophantine_solver.git
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Move the directory _diophantine-solver_  to a directory that is a search\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Move the directory _diophantine_solver_  to a directory that is a search\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path of Python, e.g.
 ```bash
 ~/.local/lib/python3.10/site-packages/ # Example of a common path.
 ```
 2. Download the source code: (also works for Windows) 
-Download the files in [tar.gz](............) or [zip](.........) form. Extract the directory _diophantine-solver_ and put in a directory that is a search path of Python, e.g.
+Download the files in [tar.gz](............) or [zip](.........) form. Extract the directory _diophantine_solver_ and put in a directory that is a search path of Python, e.g.
 ```bash
 ~/.local/lib/python3.10/site-packages/ # Example of a common path.
 ```
@@ -30,23 +30,23 @@ To find the available search paths, type the following commands in a Python term
 
 In your Python terminal or script type
 ```Python
->>> import diophantine-solver
+>>> import diophantine_solver
 ```
 Now call the function using
 ```Python
-diophantine-solver.solve
+diophantine_solver.solve
 ```
 The syntax is 
 ```Python
-diophantine-solver.solve(coefficients, right-hand-side)
+diophantine_solver.solve(coefficients, right-hand-side)
 ```
 For a detailed explanation, type
 ```Python
->>> help(diophantine-solver)
+>>> help(diophantine_solver)
 ```
 or
 ```Python
->>> help(diophantine-solver.solve)
+>>> help(diophantine_solver.solve)
 ```
 
 
